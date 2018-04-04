@@ -650,7 +650,7 @@ module Flexirest
     def handle_hal_links_embedded(object, attributes)
       attributes["_links"] = attributes[:_links] if attributes[:_links]
       attributes["_embedded"] = attributes[:_embedded] if attributes[:_embedded]
-      if attributes["_links"]
+      if attributes["_links"] and not attributes["_links"].is_a?(Array)
         attributes["_links"].each do |key, value|
           if value.is_a?(Array)
             object._attributes[key.to_sym] ||= Flexirest::ResultIterator.new
